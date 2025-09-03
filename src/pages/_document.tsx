@@ -21,7 +21,7 @@ export default function Document() {
             document.head.prepend(app);
 
             lennawebchat.onload = function () {
-              LennaWebchatInit("lejRej", "9aAOdv");
+              LennaWebchatInit("xboKXb", "b82Ole");
             };
           `}
         </Script>
