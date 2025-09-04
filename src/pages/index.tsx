@@ -14,29 +14,25 @@ export default function Home() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
+  const payload = {
+    name: "Double Dee",
+    email: "double.dee@gmail.com",
+    phone: "081273616417",
+    additional_field: {
+      nip: "123456789",
+      address: "123 Main St, Anytown, USA",
+      birthday: "1990-01-01",
+    },
+  };
+
+  const [cred, setCred] = React.useState(JSON.stringify(payload, null, 3));
+
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("EEEEE", e.target);
-
-    const payload = {
-      name: "Double Dee",
-      email: "double.dee@gmail.com",
-      phone: "081273616417",
-      additional_field: {
-        nip: "123456789",
-        address: "123 Main St, Anytown, USA",
-        birthday: "1990-01-01",
-      },
-    };
-
-    AutoLogin(
-      payload.name,
-      payload.email,
-      payload.phone,
-      payload.additional_field
-    );
+    const data = JSON.parse(cred);
+    AutoLogin(data.name, data.email, data.phone, data.additional_field);
 
     router.replace("/homepage");
   };
@@ -68,6 +64,12 @@ export default function Home() {
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 placeholder="Password"
+              />
+              <textarea
+                rows={16}
+                value={cred}
+                onChange={(e) => setCred(e.target.value)}
+                className="border border-neutral-200 w-full rounded-md p-2"
               />
               <Button type="submit" variant="primary" className="mt-4">
                 Submit
